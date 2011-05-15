@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """Old school testing"""
-from Main import FTPConnector, ConnectionInfo
-slist = [ConnectionInfo("192.168.1.100", "dummy", "server")]
+from Main import FTPConnector, ConnectionInfo, ServerList
+m = ServerList()
+slist = m.make_array()
 t = FTPConnector(slist)
 t.list()
 
