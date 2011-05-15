@@ -3,12 +3,13 @@
 
 from ftplib import FTP
 from ftplib import FTP_TLS
+import socket
 
 class FTPConnector():
 	""" Class that connects to the FTP servers and takes care of interfaceing with the FTP"""
 	_connected = False
 	_server_list = []
-	
+
 	def __init__(self, server_list):
 		self._server_list = server_list
 
@@ -25,26 +26,32 @@ class FTPConnector():
 			if len(self._server_list) == 0 :
 				print "No servers where specified. \n"
 			else:
-				for server in self._server_list:
-					if server.url.startswith( 'ftpes' ):
-						ftp = FTP_TLS(server.url, server.username, server.password)
-						# Now one could specify crt and key file but meh.
-					else:				
-						ftp = FTP(server.url, server.username, server.password)
-					#TODO: Add exception handling. 
-					print "Connected to " + server.url + "\n"
+				i=0
+				for line in self._server_list:
+					try:
+						if self._server_list[i][3] == 1:
+							ftp = FTP_TLS(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2])
+						else:
+							ftp = FTP(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2])
+					except socket.error, msg:
+						print "SocketError when trying to connect to: " + self._server_list[i][0]
+						break
+					#TODO: Add better exception handling. 
+					print "Connected to " + self._server_list[i][0] + "\n"
 					connections.append(ftp)
-					return connections
+					i=i+1
+
+				return connections
 		 
 	def list(self):
 		"""Sends list command to all connected servers and outputs in sys.out"""
 		connections = self.connect()
-		for con in connections:
-			con.retrlines('LIST') 
+		if connections:
+			for con in connections:
+				con.retrlines('LIST')
+		else:
+			print "No connections"
 
-
-			
-			
 class ConnectionInfo():
 	"""Class that stores information about the FTP connection"""
 	def __init__(self, url, username, password, port=21):
@@ -52,3 +59,16 @@ class ConnectionInfo():
 		self.port = port
 		self.username = username
 		self.password = password
+
+class ServerList():
+	def make_array(self):
+		server_list = open("serverlist.txt", "r")
+		server_list_lines = sum(1 for line in server_list.readlines())
+		server_list_array = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
+		server_list.seek(0)
+
+		for i in range(server_list_lines):
+			server_list_array[i] = server_list.readline().rstrip("\n").split(",")
+		server_list.close()
+
+		return server_list_array
