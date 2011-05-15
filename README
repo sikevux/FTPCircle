@@ -1,7 +1,7 @@
 FTPCircle
 ==========
 
-Simply a command line FTP program that will perform a search on multiple FTP servers listed in the serverlist.txt file.
+Simply a commandline FTP program that will perform a search on multiple FTP servers listed in the serverlist.txt file.
 
 serverlist.txt syntax
 ---------------------
