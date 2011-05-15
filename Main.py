@@ -29,7 +29,7 @@ class FTPConnector():
 					else:				
 						ftp = FTP(server.url, server.username, server.password)
 					#TODO: Add exception handling. 
-					print "Connected to " + server.url "\n"
+					print "Connected to " + server.url + "\n"
 					connections.append(ftp)
 					return connections
 		 
