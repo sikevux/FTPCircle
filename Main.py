@@ -1,4 +1,6 @@
 from ftplib import FTP
+from ftplib import FTP_TLS
+
 class FTPConnector():
 	""" Class that connects to the FTP servers and takes care of interfaceing with the FTP"""
 	_connected = False
@@ -21,7 +23,11 @@ class FTPConnector():
 				print "No servers where specified. \n"
 			else:
 				for server in self._server_list:
-					ftp = FTP(server.url, server.username, server.password)
+					if server.url.startswith( 'ftpes' ):
+						ftp = FTP_TLS(server.url, server.username, server.password)
+						# Now one could specify crt and key file but meh.
+					else:				
+						ftp = FTP(server.url, server.username, server.password)
 					#TODO: Add exception handling. 
 					print "Connected to " + server.url "\n"
 					connections.append(ftp)
