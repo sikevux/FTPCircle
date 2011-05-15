@@ -36,11 +36,12 @@ class FTPConnector():
 					except socket.error, msg:
 						print "SocketError when trying to connect to: " + self._server_list[i][0]
 						break
-					#TODO: Add exception handling. 
+					#TODO: Add better exception handling. 
 					print "Connected to " + self._server_list[i][0] + "\n"
 					connections.append(ftp)
 					i=i+1
-					return connections
+
+				return connections
 		 
 	def list(self):
 		"""Sends list command to all connected servers and outputs in sys.out"""
