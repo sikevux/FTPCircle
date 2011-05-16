@@ -41,6 +41,15 @@ class FTPThread(Thread):
 			self.ftp.retrlines('LIST')
 		self._lock.release()
 
+	def disconnect(self):
+		self._lock.acquire()
+		if self.ftp != None:
+			if not self.ftp.quit():
+				self.ftp.close()
+		else:
+			print "Nothing to disconnect"
+		self._lock.release()
+
 class FTPConnector():
 	""" Class that connects to the FTP servers and takes care of interfaceing with the FTP"""
 	_connected = False
@@ -89,6 +98,15 @@ class FTPConnector():
 		if connections:
 			for con in connections:
 				con.list()
+		else:
+			print "No connections"
+
+	def disconnect(self):
+		"""Disconnects all connections"""
+		connections = self.connect()
+		if connections:
+			for con in connections:
+				con.disconnect()
 		else:
 			print "No connections"
 
