@@ -15,3 +15,16 @@ serverlist.txt syntax
 It's csv so basically:
 
 * server,user,pass,tlstoggle
+
+Main functions
+--------------
+
+FTPConnector can do the following:
+
+* connect()
+	Basically initiates the FTP connection
+* list()
+	Sends LIST to the FTP server and prints the response to std.out
+* disconnect()
+	Disconnects the FTP connection
+
