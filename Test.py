@@ -10,17 +10,17 @@ class TestSequence(unittest.TestCase):
 	def setUp(self):
 		""" Things that will need to be run before the tests"""
 		self._server_list = ServerList()
-		self._server_list_array = self._server_list.make_array()
+		self._server_list_matrix = self._server_list.make_matrix()
 
 	def test_connect(self):
-		self._ftp_connector = FTPConnector(self._server_list_array)
+		self._ftp_connector = FTPConnector(self._server_list_matrix)
 
 	def test_list(self):
-		self._ftp_connector = FTPConnector(self._server_list_array)
+		self._ftp_connector = FTPConnector(self._server_list_matrix)
 		self._ftp_connector.list()
 
 	def test_discconect(self):
-		self._ftp_connector = FTPConnector(self._server_list_array)
+		self._ftp_connector = FTPConnector(self._server_list_matrix)
 		self._ftp_connector.disconnect()
 
 if __name__ == '__main__':
