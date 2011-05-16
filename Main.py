@@ -91,7 +91,7 @@ class FTPConnector():
 					#TODO: Add better exception handling. 
 					print "Connected to " + self._server_list[i][0] + "\n"
 					connections.append(ftp)
-					i=i+1
+					i += 1
 
 				return connections
 		 
@@ -123,15 +123,15 @@ class ConnectionInfo():
 
 class ServerList():
 	"""Interface to serverlist.txt """
-	def make_array(self):
+	def make_matrix(self):
 		"""Parse serverlist.txt and generates an matrix representing the information """
 		server_list = open("serverlist.txt", "r")
 		server_list_lines = sum(1 for line in server_list.readlines())
-		server_list_array = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
+		server_list_matrix = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
 		server_list.seek(0)
 
 		for i in range(server_list_lines):
-			server_list_array[i] = server_list.readline().rstrip("\n").split(",")
+			server_list_matrix[i] = server_list.readline().rstrip("\n").split(",")
 		server_list.close()
 
-		return server_list_array
+		return server_list_matrix
