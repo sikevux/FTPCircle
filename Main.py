@@ -1,11 +1,13 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
+# vim:fileencoding=utf8
 
 from ftplib import FTP
 from ftplib import FTP_TLS
 import socket
 from threading import Thread
 from threading import RLock
+from re import search
 
 class FTPThread(Thread):
 	""" Class to do the threaded fetching """
@@ -62,12 +64,15 @@ class FTPConnector():
 				i=0
 				for line in self._server_list:
 					try:
-						if self._server_list[i][3] == 1:
-							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 1)
-							ftp.start()
+						if self._server_list[i][0] != '':
+							if self._server_list[i][3] == 1:
+								ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 1)
+								ftp.start()
+							else:
+								ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 0)
+								ftp.start()
 						else:
-							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 0)
-							ftp.start()
+							break
 
 					except:
 						print "Something went wrong trying to connect to: " + self._server_list[i][0]
