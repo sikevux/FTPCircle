@@ -6,6 +6,6 @@ from Main import FTPConnector, ConnectionInfo, ServerList
 m = ServerList()
 slist = m.make_array()
 t = FTPConnector(slist)
-t.connect()
+t.list()
 """ t.list() is broken """
 """Soon to be unit testing class"""
