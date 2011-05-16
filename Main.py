@@ -4,20 +4,21 @@
 from ftplib import FTP
 from ftplib import FTP_TLS
 import socket
-import threading
+from threading import Thread
+from threading import RLock
 
-class FTPThread(threading.Thread):
+class FTPThread(Thread):
 	""" Class to do the threaded fetching """
 	#TODO: Queue.Queue
 	ftp = None
 	def __init__(self, url, user, password, tls):
-		threading.Thread.__init__(self)
+		Thread.__init__(self)
 		self.url = url
 		self.user = user
 		self.password = password
 		self.tls = tls
 		#Get thread lock to enable synchronized methods.
-		self._lock = threading.RLock()
+		self._lock = RLock()
 
 	def run(self):
 		self._lock.acquire()
