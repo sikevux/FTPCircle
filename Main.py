@@ -9,29 +9,13 @@ import threading
 class FTPThread(threading.Thread):
 	""" Class to do the threaded fetching """
 	#TODO: Queue.Queue
-<<<<<<< HEAD
-=======
 	ftp = None
->>>>>>> upstream/master
 	def __init__(self, url, user, password, tls):
 		threading.Thread.__init__(self)
 		self.url = url
 		self.user = user
 		self.password = password
 		self.tls = tls
-<<<<<<< HEAD
-
-	def run(self):
-		try:
-			if self.tls == 1:
-				ftp = FTP_TLS(self.url, self.user, self.password)
-			else:
-				ftp = FTP(self.url, self.user, self.password)
-		except socket.error, msg:
-			print "SocketError when trying to connect to: " + self.url
-
-		return ftp
-=======
 		#Get thread lock to enable synchronized methods.
 		self._lock = threading.RLock()
 
@@ -53,7 +37,6 @@ class FTPThread(threading.Thread):
 		else:	
 			self.ftp.retrlines('LIST')
 		self._lock.release()
->>>>>>> upstream/master
 
 class FTPConnector():
 	""" Class that connects to the FTP servers and takes care of interfaceing with the FTP"""
@@ -70,10 +53,6 @@ class FTPConnector():
 			return None 
 			#TODO: Save connection instances. (Already done in the threads, need check if Timeout has set in)
 		else:
-<<<<<<< HEAD
-#			print "Not connected.\n"
-=======
->>>>>>> upstream/master
 			print "Connnecting... \n"
 			connections = []
 			if len(self._server_list) == 0 :
@@ -83,17 +62,11 @@ class FTPConnector():
 				for line in self._server_list:
 					try:
 						if self._server_list[i][3] == 1:
-<<<<<<< HEAD
-							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 1).start()
-						else:
-							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 0).start()
-=======
 							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 1)
 							ftp.start()
 						else:
 							ftp = FTPThread(self._server_list[i][0], self._server_list[i][1], self._server_list[i][2], 0)
 							ftp.start()
->>>>>>> upstream/master
 
 					except:
 						print "Something went wrong trying to connect to: " + self._server_list[i][0]
@@ -105,7 +78,6 @@ class FTPConnector():
 				return connections
 		 
 	def list(self):
-		""" Currently Broken """
 		"""Sends list command to all connected servers and outputs in sys.out"""
 		connections = self.connect()
 		if connections:
