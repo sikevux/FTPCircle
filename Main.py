@@ -23,6 +23,7 @@ class FTPThread(Thread):
 		self._lock = RLock()
 
 	def run(self):
+		"""Connects to the FTP and creates FTP object stored in self.ftp"""
 		self._lock.acquire()
 		try:
 			if self.tls == 1:
@@ -34,6 +35,7 @@ class FTPThread(Thread):
 		self._lock.release()
 	
 	def list(self):
+		"""Sends list command to self.ftp and outputs it in std.out"""
 		self._lock.acquire()
 		if self.ftp == None:
 			print "No connection"
@@ -42,6 +44,7 @@ class FTPThread(Thread):
 		self._lock.release()
 
 	def disconnect(self):
+		"""Disconnects the connection to the FTP server"""
 		self._lock.acquire()
 		if self.ftp != None:
 			if not self.ftp.quit():
@@ -59,7 +62,7 @@ class FTPConnector():
 		self._server_list = server_list
 
 	def connect(self):
-		"""Connects to all of the servers listed in _server_lsit"""
+		"""Connects to all of the servers listed in _server_list"""
 		if self._connected:
 			print "Already connected"
 			return None 
@@ -93,7 +96,7 @@ class FTPConnector():
 				return connections
 		 
 	def list(self):
-		"""Sends list command to all connected servers and outputs in sys.out"""
+		"""Sends list command to all servers listed in serverlist.txt and outputs in sys.out"""
 		connections = self.connect()
 		if connections:
 			for con in connections:
@@ -119,7 +122,9 @@ class ConnectionInfo():
 		self.password = password
 
 class ServerList():
+	"""Interface to serverlist.txt """
 	def make_array(self):
+		"""Parse serverlist.txt and generates an matrix representing the information """
 		server_list = open("serverlist.txt", "r")
 		server_list_lines = sum(1 for line in server_list.readlines())
 		server_list_array = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
