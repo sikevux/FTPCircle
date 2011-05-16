@@ -3,3 +3,4 @@ ftp.acc.umu.se,anonymous,anonymous,0
 mirrors.se.eu.kernel.org,anonymous,anonymous,0
 ftp.ds.karen.hj.se,anonymous,anonymous,0
 ftp.sunet.se,anonymous,anonymous,0
+
