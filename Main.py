@@ -124,7 +124,7 @@ class ConnectionInfo():
 class ServerList():
 	"""Interface to serverlist.txt """
 	def make_matrix(self):
-		"""Parse serverlist.txt and generates an matrix representing the information """
+		"""Parse serverlist.txt and generates a matrix representing the information """
 		server_list = open("serverlist.txt", "r")
 		server_list_lines = sum(1 for line in server_list.readlines())
 		server_list_matrix = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
