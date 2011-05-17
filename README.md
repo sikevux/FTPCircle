@@ -19,10 +19,10 @@ It's csv so basically:
 Main functions
 --------------
 
-###ConnectionInfo### 
+###ConnectionInfo 
 Class that stores information about the FTP connection
 
-###FTP### 
+###FTP 
 An FTP client class.
 
     To create a connection, call the class using these arguments:
@@ -45,13 +45,13 @@ An FTP client class.
     and PORT or PASV commands.
 
 
-###FTPConnector### 
+###FTPConnector 
  Class that connects to the FTP servers and takes care of interfaceing with the FTP
 
-###FTPThread### 
+###FTPThread 
  Class to do the threaded fetching 
 
-###FTP_TLS### 
+###FTP_TLS 
 A FTP subclass which adds TLS support to FTP as described
         in RFC-4217.
 
@@ -85,10 +85,10 @@ A FTP subclass which adds TLS support to FTP as described
         >>>
         
 
-###ServerList### 
+###ServerList 
 Interface to serverlist.txt 
 
-###__builtins__### 
+###__builtins__ 
 dict() -> new empty dictionary
 dict(mapping) -> new dictionary initialized from a mapping object's
     (key, value) pairs
@@ -99,23 +99,23 @@ dict(iterable) -> new dictionary initialized as if via:
 dict(**kwargs) -> new dictionary initialized with the name=value pairs
     in the keyword argument list.  For example:  dict(one=1, two=2)
 
-###__file__### 
+###__file__ 
 str(object) -> string
 
 Return a nice string representation of the object.
 If the argument is a string, the return value is the same object.
 
-###__name__### 
+###__name__ 
 str(object) -> string
 
 Return a nice string representation of the object.
 If the argument is a string, the return value is the same object.
 
-###search### 
+###search 
 Scan through string looking for a match to the pattern, returning
     a match object, or None if no match was found.
 
-###socket### 
+###socket 
 This module provides socket operations and some related functions.
 On Unix, it supports IP (Internet Protocol) and Unix domain sockets.
 On other systems, it only supports IP. Functions specific for a
