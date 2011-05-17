@@ -122,10 +122,10 @@ class ConnectionInfo():
 		self.password = password
 
 class ServerList():
-	"""Interface to serverlist.txt """
+	"""Interface to serverlist.csv """
 	def make_matrix(self):
-		"""Parse serverlist.txt and generates a matrix representing the information """
-		server_list = open("serverlist.txt", "r")
+		"""Parse serverlist.csv and generates a matrix representing the information """
+		server_list = open("serverlist.csv", "r")
 		server_list_lines = sum(1 for line in server_list.readlines())
 		server_list_matrix = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
 		server_list.seek(0)

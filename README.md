@@ -86,7 +86,7 @@ A FTP subclass which adds TLS support to FTP as described
         
 
 ###ServerList 
-Interface to serverlist.txt 
+Interface to serverlist.csv 
 
 ###__builtins__ 
 dict() -> new empty dictionary
