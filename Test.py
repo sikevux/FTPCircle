@@ -4,6 +4,7 @@
 
 import unittest
 from Main import FTPConnector, ConnectionInfo, ServerList
+import CommentGenerate
 
 class TestSequence(unittest.TestCase):
 	""" Class to do all the testing"""
@@ -22,6 +23,9 @@ class TestSequence(unittest.TestCase):
 	def test_discconect(self):
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
 		self._ftp_connector.disconnect()
+	def test_CommentGenerate(self):
+		c = CommentGenerate.CommentGenerate()
+		c.openFile()
 
 if __name__ == '__main__':
 	unittest.main()
