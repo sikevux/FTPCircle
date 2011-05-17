@@ -22,7 +22,7 @@ class CommentGenerate:
 		for name in dir(Main):
 			info = getattr(Main, name).__doc__
 			if info != None:
-				array.append(name + ": \n" + info + "\n")
+				array.append("###" +name +"###" + ": \n" + info + "\n")
 		return array
 		
 
