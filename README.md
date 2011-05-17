@@ -9,7 +9,7 @@ Or to quote [melpomene](http://blog.kejsarmakten.se/all/projects/2011/05/15/pyth
 > allowing the user the search them all at once
 > and automating the choice of server when a file is selected for download.
 
-serverlist.txt syntax
+serverlist.csv syntax
 ---------------------
 
 It's csv so basically:
