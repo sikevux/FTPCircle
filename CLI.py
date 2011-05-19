@@ -13,20 +13,24 @@ class BasicCLI():
 		self._server_list = ServerList()
 		self._server_list_matrix = self._server_list.make_matrix()
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
-		print "Welcome to FTPCircle!\nArguments: list, help, exit"
+		print "Welcome to FTPCircle!\nArguments: list, download, help, exit"
 		while True:
 			luser_input = raw_input(">> ")
 			if luser_input == "list":
 				self._ftp_connector.list()
 			elif luser_input == "exit":
 				sys.exit()
+			elif luser_input.startswith("download "):
+				download_list = luser_input.split(" ")
+				print download_list[1]
+				#TODO: Download it
 			elif luser_input in ("help", "h", "?"):
 				self.usage()
 			else:
 				print "Your input was:", luser_input
 	def usage(self):
 		"""Handles the usage"""
-		print "Arguments: list, help, exit\nlist: List folders on all servers\nhelp: Prints this message\nexit: Exits this program"
+		print "Arguments: list, download, help, exit\nlist: List folders on all servers\ndownload: Downloads file\nhelp: Prints this message\nexit: Exits this program"
 
 class ArgumentHandler():
 	"""Usage: sumfile [-h help] [-d debug] [-s serverlist]"""
