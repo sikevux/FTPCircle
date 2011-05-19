@@ -8,18 +8,25 @@ from Main import FTPConnector, ConnectionInfo, ServerList
 
 
 class BasicCLI():
-	"""Basic CLI"""
+	"""Class for creating and handling the very basic CLI"""
 	def __init__(self):
 		self._server_list = ServerList()
 		self._server_list_matrix = self._server_list.make_matrix()
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
+		print "Welcome to FTPCircle!\nArguments: list, help, exit"
 		while True:
-			moo = raw_input(">> ")
-			if moo == "list":
+			luser_input = raw_input(">> ")
+			if luser_input == "list":
 				self._ftp_connector.list()
-			elif moo in ("exit", "quit"):
+			elif luser_input == "exit":
 				sys.exit()
-			print moo
+			elif luser_input in ("help", "h", "?"):
+				self.usage()
+			else:
+				print "Your input was:", luser_input
+	def usage(self):
+		"""Handles the usage"""
+		print "Arguments: list, help, exit\nlist: List folders on all servers\nhelp: Prints this message\nexit: Exits this program"
 
 class ArgumentHandler():
 	"""Usage: sumfile [-h help] [-d debug] [-s serverlist]"""
