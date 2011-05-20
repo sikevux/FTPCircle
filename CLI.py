@@ -15,7 +15,7 @@ class BasicCLI():
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
 		print "Welcome to FTPCircle!\nArguments: list, download, help, exit"
 		while True:
-			luser_input = raw_input(">> ")
+			luser_input = raw_input("-> ")
 			if luser_input == "list":
 				self._ftp_connector.list()
 			elif luser_input == "exit":
@@ -29,23 +29,23 @@ class BasicCLI():
 			else:
 				print "Your input was:", luser_input
 	def usage(self):
-		"""Handles the usage"""
+		"""Handler for CLI usage"""
 		print "Arguments: list, download, help, exit\nlist: List folders on all servers\ndownload: Downloads file\nhelp: Prints this message\nexit: Exits this program"
 
 class ArgumentHandler():
 	"""Usage: sumfile [-h help] [-d debug] [-s serverlist]"""
 	def usage(self):
-		""" Handles the usage"""
+		"""Handler for argument usage"""
 		#TODO Fix better usage
 		print self.__doc__
 
 	def help_arg(self):
-		"""Handles the help flag"""
+		"""Handler for help flag"""
 		self.usage()
 		sys.exit()
 
 	def debug_arg(self):
-		"""Handles the debug flag"""
+		"""Handler for debug flag"""
 		global _debug
 		_debug = 1
 
@@ -66,10 +66,7 @@ class ArgumentHandler():
 				print "m00"
 
 def main(argv):
-	""" Tralalalal """
+	"""Main function that passes the arguments that the user supplied to the argument handler"""
 	ArgumentHandler(argv)
 if __name__ == "__main__":
 	main(sys.argv[1:])
-
-
-
