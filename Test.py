@@ -5,6 +5,7 @@
 import unittest
 from Main import FTPConnector, ConnectionInfo, ServerList
 import CommentGenerate
+import Database
 
 class TestSequence(unittest.TestCase):
 	""" Class to do all the testing"""
@@ -26,6 +27,12 @@ class TestSequence(unittest.TestCase):
 	def test_CommentGenerate(self):
 		c = CommentGenerate.CommentGenerate()
 		c.openFile()
+	def test_Database(self):
+		d = Database.Database()
+		file_list= [["fil1", "/etc/fil1", "server.se"],["fil2", "/etc/fil2", "server.org"],["fil3", "/etc/fil3", "server.com"]]
+		d.updateDB(file_list)
+		d.disconnect()
+		#d.initDB() #This is already done and the file is in the repo
 
 if __name__ == '__main__':
 	unittest.main()
