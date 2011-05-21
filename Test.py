@@ -10,7 +10,7 @@ class TestSequence(unittest.TestCase):
 	""" Class to do all the testing"""
 	def setUp(self):
 		""" Things that will need to be run before the tests"""
-		self._server_list = ServerList()
+		self._server_list = ServerList("serverlist.csv")
 		self._server_list_matrix = self._server_list.make_matrix()
 
 	def test_connect(self):
