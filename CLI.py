@@ -9,25 +9,46 @@ from Main import FTPConnector, ConnectionInfo, ServerList
 
 class BasicCLI():
 	"""Class for creating and handling the very basic CLI"""
-	def __init__(self):
-		self._server_list = ServerList()
+	def __init__(self, server_list_name):
+		self._server_list = ServerList(server_list_name)
 		self._server_list_matrix = self._server_list.make_matrix()
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
-		print "Welcome to FTPCircle!\nArguments: list, download, help, exit"
-		while True:
-			luser_input = raw_input("-> ")
-			if luser_input == "list":
-				self._ftp_connector.list()
-			elif luser_input == "exit":
-				sys.exit()
-			elif luser_input.startswith("download "):
-				download_list = luser_input.split(" ")
-				print download_list[1]
-				#TODO: Download it
-			elif luser_input in ("help", "h", "?"):
-				self.usage()
-			else:
-				print "Your input was:", luser_input
+		print "Welcome to FTPCircle!\nArguments: list, download, help, exit, serverlist"
+		self.interface()
+
+	def interface(self):
+		self.luser_input = raw_input("-> ")
+		if self.luser_input == "list":
+			self.interface_list()
+		elif self.luser_input == "exit":
+			sys.exit()
+		elif self.luser_input.startswith("download "):
+			self.interface_download()
+		elif self.luser_input in ("help", "h", "?"):
+			self.usage()
+		elif self.luser_input.startswith("serverlist "):
+			self.interface_serverlist()
+		else:
+			print "Your input was:", self.luser_input
+
+	def interface_download(self):
+		#TODO Download interface to download
+		download_list = self.luser_input.split(" ")
+		print download_list[1]
+		#TODO: Download it
+		self.interface()
+
+	def interface_serverlist(self):
+		#TODO Serverlist interface to pipe to download interface and list interface
+		server_list_name = self.luser_input.split(" ")
+		print server_list_name[1]
+		self.interface()
+
+	def interface_list(self):
+		#TODO List interface to list
+		self._ftp_connector.list()
+		self.interface()
+
 	def usage(self):
 		"""Handler for CLI usage"""
 		print "Arguments: list, download, help, exit\nlist: List folders on all servers\ndownload: Downloads file\nhelp: Prints this message\nexit: Exits this program"
@@ -55,15 +76,17 @@ class ArgumentHandler():
 		except getopt.GetoptError:
 			self.usage()
 			sys.exit(2)
-
+		#FULHACK!
+		i=0
 		for opt, arg in opts:
+			i += 2
 			if opt == "-h":
 				self.help_arg()
 			elif opt == "-d":
 				self.debug_arg()
 			elif opt == "-s":
-				#TODO Handle serverlist
-				print "m00"
+				server_list_name = sys.argv[i]
+				BasicCLI(server_list_name)
 
 def main(argv):
 	"""Main function that passes the arguments that the user supplied to the argument handler"""
