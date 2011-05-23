@@ -51,7 +51,7 @@ class BasicCLI():
 
 	def usage(self):
 		"""Handler for CLI usage"""
-		print "Arguments: list, download, help, exit\nlist: List folders on all servers\ndownload: Downloads file\nhelp: Prints this message\nexit: Exits this program"
+		print "Arguments: list, download, help, exit\nlist: List folders on all servers\ndownload: Downloads file\nserverlist: Changes the list of servers to use\nhelp: Prints this message\nexit: Exits this program"
 
 class ArgumentHandler():
 	"""Usage: sumfile [-h help] [-d debug] [-s serverlist]"""
