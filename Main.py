@@ -8,6 +8,7 @@ import socket
 from threading import Thread
 from threading import RLock
 from re import search
+import sys
 
 class FTPThread(Thread):
 	""" Class to do the threaded fetching """
@@ -71,7 +72,7 @@ class FTPConnector():
 			print "Connnecting... \n"
 			connections = []
 			if len(self._server_list) == 0 :
-				print "No servers where specified. Please verify serverlist.txt is not empty \n"
+				print "No servers where specified. Please verify serverlist.csv is not empty \n"
 			else:
 				i=0
 				for line in self._server_list:
@@ -96,7 +97,7 @@ class FTPConnector():
 				return connections
 		 
 	def list(self):
-		"""Sends list command to all servers listed in serverlist.txt and outputs in sys.out"""
+		"""Sends list command to all servers listed in serverlist.csv and outputs in sys.out"""
 		connections = self.connect()
 		if connections:
 			for con in connections:
@@ -128,7 +129,12 @@ class ServerList():
 		self._server_list = server_list
 	def make_matrix(self):
 		"""Parse serverlist.csv and generates a matrix representing the information """
-		server_list = open(self._server_list, "r")
+		try:
+			server_list = open(self._server_list, "r")
+		except IOError:
+			print "File not found:", self._server_list
+			sys.exit()
+
 		server_list_lines = sum(1 for line in server_list.readlines())
 		server_list_matrix = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
 		server_list.seek(0)

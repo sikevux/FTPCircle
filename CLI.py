@@ -85,8 +85,12 @@ class ArgumentHandler():
 			elif opt == "-d":
 				self.debug_arg()
 			elif opt == "-s":
-				server_list_name = sys.argv[i]
-				BasicCLI(server_list_name)
+				try:
+					server_list_name = sys.argv[i]
+					BasicCLI(server_list_name)
+				except IndexError:
+					print "No server list specified"
+					sys.exit()
 
 def main(argv):
 	"""Main function that passes the arguments that the user supplied to the argument handler"""
