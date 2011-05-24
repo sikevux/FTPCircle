@@ -6,6 +6,7 @@
 import sqlite3
 class Database():
 	"""Interface to the SQLite database. This is the class that will cache the servers filenames and also conduct searches."""
+	#TODO: Fix Try Except
 	def __init__(self):
 		self.conn = sqlite3.connect('database.db')
 		self.c = self.conn.cursor()

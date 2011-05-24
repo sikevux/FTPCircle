@@ -32,20 +32,20 @@ class BasicCLI():
 			print "Your input was:", self.luser_input
 
 	def interface_download(self):
-		#TODO Download interface to download
+		#TODO: Download interface to download
 		download_list = self.luser_input.split(" ")
 		print download_list[1]
 		#TODO: Download it
 		self.interface()
 
 	def interface_serverlist(self):
-		#TODO Serverlist interface to pipe to download interface and list interface
+		#TODO: Serverlist interface to pipe to download interface and list interface
 		server_list_name = self.luser_input.split(" ")
 		print server_list_name[1]
 		self.interface()
 
 	def interface_list(self):
-		#TODO List interface to list
+		#TODO: List interface to list
 		self._ftp_connector.list()
 		self.interface()
 
@@ -57,7 +57,7 @@ class ArgumentHandler():
 	"""Usage: sumfile [-h help] [-d debug] [-s serverlist]"""
 	def usage(self):
 		"""Handler for argument usage"""
-		#TODO Fix better usage
+		#TODO: Fix better usage
 		print self.__doc__
 
 	def help_arg(self):
