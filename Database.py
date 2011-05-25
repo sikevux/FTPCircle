@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.2
 # -*- coding: utf-8 -*-
 # vim:fileencoding=utf8
 
@@ -6,6 +6,7 @@
 import sqlite3
 class Database():
 	"""Interface to the SQLite database. This is the class that will cache the servers filenames and also conduct searches."""
+	#TODO: Fix Try Except
 	def __init__(self):
 		self.conn = sqlite3.connect('database.db')
 		self.c = self.conn.cursor()

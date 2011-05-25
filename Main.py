@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.2
 # -*- coding: utf-8 -*-
 # vim:fileencoding=utf8
 
@@ -8,6 +8,7 @@ import socket
 from threading import Thread
 from threading import RLock
 from re import search
+import sys
 
 class FTPThread(Thread):
 	""" Class to do the threaded fetching """
@@ -30,15 +31,15 @@ class FTPThread(Thread):
 				self.ftp = FTP_TLS(self.url, self.user, self.password)
 			else:
 				self.ftp = FTP(self.url, self.user, self.password)
-		except socket.error, msg:
-			print "SocketError when trying to connect to: " + self.url
+		except socket.error as msg:
+			print("SocketError when trying to connect to: " + self.url)
 		self._lock.release()
 	
 	def list(self):
 		"""Sends list command to self.ftp and outputs it in std.out"""
 		self._lock.acquire()
 		if self.ftp == None:
-			print "No connection"
+			print("No connection")
 		else:	
 			self.ftp.retrlines('LIST')
 		self._lock.release()
@@ -50,7 +51,7 @@ class FTPThread(Thread):
 			if not self.ftp.quit():
 				self.ftp.close()
 		else:
-			print "Nothing to disconnect"
+			print("Nothing to disconnect")
 		self._lock.release()
 
 class FTPConnector():
@@ -64,14 +65,14 @@ class FTPConnector():
 	def connect(self):
 		"""Connects to all of the servers listed in _server_list"""
 		if self._connected:
-			print "Already connected"
+			print("Already connected")
 			return None 
 			#TODO: Save connection instances. (Already done in the threads, need check if Timeout has set in)
 		else:
-			print "Connnecting... \n"
+			print("Connnecting... \n")
 			connections = []
 			if len(self._server_list) == 0 :
-				print "No servers where specified. Please verify serverlist.txt is not empty \n"
+				print("No servers where specified. Please verify serverlist.csv is not empty \n")
 			else:
 				i=0
 				for line in self._server_list:
@@ -87,22 +88,22 @@ class FTPConnector():
 							break
 
 					except:
-						print "Something went wrong trying to connect to: " + self._server_list[i][0]
+						print("Something went wrong trying to connect to: " + self._server_list[i][0])
 					#TODO: Add better exception handling. 
-					print "Connected to " + self._server_list[i][0] + "\n"
+					print("Connected to " + self._server_list[i][0] + "\n")
 					connections.append(ftp)
 					i += 1
 
 				return connections
 		 
 	def list(self):
-		"""Sends list command to all servers listed in serverlist.txt and outputs in sys.out"""
+		"""Sends list command to all servers listed in serverlist.csv and outputs in sys.out"""
 		connections = self.connect()
 		if connections:
 			for con in connections:
 				con.list()
 		else:
-			print "No connections"
+			print("No connections")
 
 	def disconnect(self):
 		"""Disconnects all connections"""
@@ -111,7 +112,7 @@ class FTPConnector():
 			for con in connections:
 				con.disconnect()
 		else:
-			print "No connections"
+			print("No connections")
 
 class ConnectionInfo():
 	"""Class that stores information about the FTP connection"""
@@ -128,7 +129,12 @@ class ServerList():
 		self._server_list = server_list
 	def make_matrix(self):
 		"""Parse serverlist.csv and generates a matrix representing the information """
-		server_list = open(self._server_list, "r")
+		try:
+			server_list = open(self._server_list, "r")
+		except IOError:
+			print("File not found:", self._server_list)
+			sys.exit()
+
 		server_list_lines = sum(1 for line in server_list.readlines())
 		server_list_matrix = [ [ 0 for i in range(4) ] for j in range(server_list_lines) ]
 		server_list.seek(0)
