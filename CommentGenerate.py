@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.2
 # -*- coding: utf-8 -*-
 # vim:fileencoding=utf8
 
@@ -14,7 +14,7 @@ class CommentGenerate:
 	def __init__(self):
 		newfile = self.openFile()
 		for row in self.generateComments(): 
-			print row
+			print(row)
 			newfile.append(row)
 		self.writeToFile(newfile)
 		
@@ -41,7 +41,7 @@ class CommentGenerate:
 					newfile.append("--------------\n")
 					break
 		except IOError:
-			print "Could not open README.md"
+			print("Could not open README.md")
 			sys.exit
 
 			file.close()
@@ -53,9 +53,9 @@ class CommentGenerate:
 		try:
 			file = open("README.md", "w")
 			for row in newfile:
-				print >> file , row
+				print(row, file=file)
 		except IOError:
-			print "Could not write to README.md"
+			print("Could not write to README.md")
 		file.close()
 
 			
