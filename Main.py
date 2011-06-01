@@ -44,6 +44,23 @@ class FTPThread(Thread):
 			self.ftp.retrlines('LIST')
 		self._lock.release()
 
+	def download(self, filename, outputFile):
+		"""Downloads file from server in binary mode"""
+		self._lock.acquire()
+		if self.ftp is None:
+			print("No connection")
+		else:
+			try:
+				outputFile
+			except NomeError:
+				outputFile = None
+
+			if outputFile is None:
+				outputFile = sys.stdout
+
+			self.ftp.retrbinary("RETR " + filename, outputFile.write)
+		self._lock.release()
+
 	def disconnect(self):
 		"""Disconnects the connection to the FTP server"""
 		self._lock.acquire()

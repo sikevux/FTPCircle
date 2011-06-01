@@ -33,6 +33,9 @@ class TestSequence(unittest.TestCase):
 		d.updateDB(file_list)
 		d.disconnect()
 		#d.initDB() #This is already done and the file is in the repo
+	def test_download(self):
+		self._ftp_connector = FTPConnector(self._server_list_matrix)
+		self._ftp_connector.download("README")
 
 if __name__ == '__main__':
 	unittest.main()
