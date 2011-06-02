@@ -24,13 +24,13 @@ class Main():
 
 	def update(self):
 		"""Not completed. Gets file lists from all FTP servers. Parses the info and writes them to the database"""
-		print "-----UPDATE------"
+		print("-----UPDATE------")
 		filelist = self.connector.list()
 		for servers in filelist:
 			for row in servers:
 				part = row.split()
 				for line in part:
-					print line
+					print(line)
 				#print row
 		#
 	def get(self, id):

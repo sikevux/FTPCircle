@@ -5,13 +5,8 @@
 # http://docs.python.org/library/sqlite3.html
 import sqlite3
 class Database():
-<<<<<<< HEAD
-	"""Interface to the SQLite database. This is the class that will cache the servers filenames and also conduct searches."""
-	#TODO: Fix Try Except
-=======
 	"""Interface to the SQLite database. This is the class that will cache the servers filenames and also conduct searches.
 		SQLite escapes are handled by the python SQL interface."""
->>>>>>> upstream/master
 	def __init__(self):
 		self.conn = sqlite3.connect('database.db')
 		self.c = self.conn.cursor()
@@ -56,12 +51,11 @@ CREATE TABLE 'filelist'('id' INTEGER PRIMARY KEY ASC, 'filename' VARCHAR(100), '
 		#
 		self.c.execute('select * from filelist')
 		for row in self.c:
-			print row
+			print(row)
 		
 		
 	def treeList(self, location="/"):
 		"""Returns a tree view of the filesystems. Reqursive from the starting point specified in location (root folder is default). """
-<<<<<<< HEAD
 	
 	def initDB(self):
 		"""Initiates and creates the database with columns"""
@@ -70,12 +64,9 @@ CREATE TABLE 'filelist'('id' INTEGER PRIMARY KEY ASC, 'filename' VARCHAR(100), '
 """
 		self.c.execute(command)
 		conn.commit()
-=======
 		#
 		
 	def search(self, search_string):
 		"""Seaches the databse after the input search_string. 
 		Returns a list of strings with possible results"""
 		#
-
->>>>>>> upstream/master

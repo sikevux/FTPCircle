@@ -4,11 +4,8 @@
 
 #Import all the moudles that should be in the README file.
 import Main
-<<<<<<< HEAD
 import sys
-=======
 import Database
->>>>>>> upstream/master
 
 #TODO: Write to file (only delete the last part of the file)
 #TODO: Better markup
@@ -67,5 +64,3 @@ class CommentGenerate:
 		except IOError:
 			print("Could not write to README.md")
 		file.close()
-
-			

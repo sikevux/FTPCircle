@@ -32,21 +32,18 @@ class TestSequence(unittest.TestCase):
 		d = Database.Database()
 		file_list= [["fil1", "/etc/fil1", "server.se"],["fil2", "/etc/fil2", "server.org"],["fil3", "/etc/fil3", "server.com"]]
 		d.updateDB(file_list)
-		print "------DATABASE DUMP ---------"
+		print("------DATABASE DUMP ---------")
 		d.list()
 		d.disconnect()
-<<<<<<< HEAD
 		#d.initDB() #This is already done and the file is in the repo
 	def test_download(self):
 		self._ftp_connector = FTPConnector(self._server_list_matrix)
 		self._ftp_connector.download("README")
-=======
 		#d.initDB() #This is already done and the file is in the repo 
 		
 	def test_Main(self):
 		main = Main()
 		#main.list()
->>>>>>> upstream/master
 
 if __name__ == '__main__':
 	unittest.main()
