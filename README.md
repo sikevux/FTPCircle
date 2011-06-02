@@ -87,7 +87,8 @@ A FTP subclass which adds TLS support to FTP as described
 
 ###Main 
 Main class, connecting FTPConnector and Database, 
-	takes care of UI input
+	takes care of UI input.
+	To clearify: UI CALLS THIS CLASS WHICH WRAPPS THE WHOLE PROGRAM AND HELPS OTHER CLASSES TO INTERFACE WITH EACH OTHER (yay, caps.)
 
 ###ServerList 
 Interface to serverlist.csv 
