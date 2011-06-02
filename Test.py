@@ -36,13 +36,13 @@ class TestSequence(unittest.TestCase):
 		d.list()
 		d.disconnect()
 		#d.initDB() #This is already done and the file is in the repo
-	def test_download(self):
-		self._ftp_connector = FTPConnector(self._server_list_matrix)
-		self._ftp_connector.download("README")
-		#d.initDB() #This is already done and the file is in the repo 
+#	def test_download(self):
+#		self._ftp_connector = FTPConnector(self._server_list_matrix)
+#		self._ftp_connector.download("README")
+#		#d.initDB() #This is already done and the file is in the repo 
 		
-	def test_Main(self):
-		main = Main()
+#	def test_Main(self):
+#		main = Main()
 		#main.list()
 
 if __name__ == '__main__':
