@@ -4,7 +4,11 @@
 
 #Import all the moudles that should be in the README file.
 import Main
+<<<<<<< HEAD
 import sys
+=======
+import Database
+>>>>>>> upstream/master
 
 #TODO: Write to file (only delete the last part of the file)
 #TODO: Better markup
@@ -25,6 +29,12 @@ class CommentGenerate:
 			info = getattr(Main, name).__doc__
 			if info != None:
 				array.append("###" +name + " \n" + info + "\n")
+		
+		for name in dir(Database):
+			info = getattr(Database, name).__doc__
+			if info != None:
+				array.append("###" +name + " \n" + info + "\n")
+			
 		return array
 		
 
