@@ -3,12 +3,13 @@
 # vim:fileencoding=utf8
 
 import unittest
-from Main import FTPConnector, ConnectionInfo, ServerList
+from Main import FTPConnector, ConnectionInfo, ServerList, Main
 import CommentGenerate
 import Database
 
 class TestSequence(unittest.TestCase):
 	""" Class to do all the testing"""
+	
 	def setUp(self):
 		""" Things that will need to be run before the tests"""
 		self._server_list = ServerList()
@@ -31,8 +32,14 @@ class TestSequence(unittest.TestCase):
 		d = Database.Database()
 		file_list= [["fil1", "/etc/fil1", "server.se"],["fil2", "/etc/fil2", "server.org"],["fil3", "/etc/fil3", "server.com"]]
 		d.updateDB(file_list)
+		print "------DATABASE DUMP ---------"
+		d.list()
 		d.disconnect()
-		#d.initDB() #This is already done and the file is in the repo
+		#d.initDB() #This is already done and the file is in the repo 
+		
+	def test_Main(self):
+		main = Main()
+		#main.list()
 
 if __name__ == '__main__':
 	unittest.main()

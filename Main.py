@@ -9,6 +9,36 @@ from threading import Thread
 from threading import RLock
 from re import search
 
+
+class Main():
+	"""Main class, connecting FTPConnector and Database, 
+	takes care of UI input.
+	To clearify: UI CALLS THIS CLASS WHICH WRAPPS THE WHOLE PROGRAM AND HELPS OTHER CLASSES TO INTERFACE WITH EACH OTHER (yay, caps.)"""
+	
+	def __init__(self):
+		self.serverlist = ServerList().make_matrix()
+		self.connector = FTPConnector(self.serverlist)
+		self.connector.connect()
+		self.update()
+
+	def update(self):
+		"""Not completed. Gets file lists from all FTP servers. Parses the info and writes them to the database"""
+		print "-----UPDATE------"
+		filelist = self.connector.list()
+		for servers in filelist:
+			for row in servers:
+				part = row.split()
+				for line in part:
+					print line
+				#print row
+		#
+	def get(self, id):
+		'''Downloads file with id-number id'''
+		pass
+	def list(self, location="/"):
+		'''Return list of all the files, used by UI'''
+		pass
+		
 class FTPThread(Thread):
 	""" Class to do the threaded fetching """
 	#TODO: Queue.Queue
@@ -40,8 +70,13 @@ class FTPThread(Thread):
 		if self.ftp == None:
 			print "No connection"
 		else:	
-			self.ftp.retrlines('LIST')
+			self.lines = []  
+			self.ftp.retrlines('LIST', self.addToList) 
+			return self.lines
 		self._lock.release()
+	
+	def addToList(self, string):
+		self.lines.append(string)
 
 	def disconnect(self):
 		"""Disconnects the connection to the FTP server"""
@@ -98,9 +133,11 @@ class FTPConnector():
 	def list(self):
 		"""Sends list command to all servers listed in serverlist.txt and outputs in sys.out"""
 		connections = self.connect()
+		files= []
 		if connections:
 			for con in connections:
-				con.list()
+				files.append(con.list())
+			return files
 		else:
 			print "No connections"
 

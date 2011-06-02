@@ -85,6 +85,10 @@ A FTP subclass which adds TLS support to FTP as described
         >>>
         
 
+###Main 
+Main class, connecting FTPConnector and Database, 
+	takes care of UI input
+
 ###ServerList 
 Interface to serverlist.csv 
 
@@ -157,4 +161,31 @@ SOCK_STREAM, SOCK_DGRAM, SOCK_RAW -- socket types (second argument)
 Many other constants may be defined; these may be used in calls to
 the setsockopt() and getsockopt() methods.
 
+
+###Database 
+Interface to the SQLite database. This is the class that will cache the servers filenames and also conduct searches.
+		SQLite escapes are handled by the python SQL interface.
+
+###__builtins__ 
+dict() -> new empty dictionary
+dict(mapping) -> new dictionary initialized from a mapping object's
+    (key, value) pairs
+dict(iterable) -> new dictionary initialized as if via:
+    d = {}
+    for k, v in iterable:
+        d[k] = v
+dict(**kwargs) -> new dictionary initialized with the name=value pairs
+    in the keyword argument list.  For example:  dict(one=1, two=2)
+
+###__file__ 
+str(object) -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
+
+###__name__ 
+str(object) -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.
 
