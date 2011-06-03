@@ -8,8 +8,7 @@ import socket
 from threading import Thread
 from threading import RLock
 from re import search
-import sys
-
+import Database
 
 class Main():
 	"""Main class, connecting FTPConnector and Database, 
@@ -18,26 +17,33 @@ class Main():
 	
 	def __init__(self):
 		self.serverlist = ServerList().make_matrix()
-		self.connector = FTPConnector(self.serverlist)
+		self.connector = FTPConnector(self.serverlist) 
+		self.database = Database.Database()
 		self.connector.connect()
 		self.update()
+		self.list()
 
 	def update(self):
 		"""Not completed. Gets file lists from all FTP servers. Parses the info and writes them to the database"""
 		print("-----UPDATE------")
 		filelist = self.connector.list()
+		db=[]
 		for servers in filelist:
 			for row in servers:
 				part = row.split()
-				for line in part:
-					print(line)
-				#print row
-		#
+				add = []
+				add.append(part[8]) #filename
+				add.append("not set") #Fullpath	
+				add.append(	"not set") #hostname / ip
+				db.append(add)
+		self.database.updateDB(db)
+		
 	def get(self, id):
 		'''Downloads file with id-number id'''
 		pass
 	def list(self, location="/"):
 		'''Return list of all the files, used by UI'''
+		self.database.list()
 		pass
 		
 class FTPThread(Thread):
@@ -71,12 +77,10 @@ class FTPThread(Thread):
 			print("No connection")
 		else:	
 			self.lines = []  
-			self.ftp.retrlines('LIST', self.addToList) 
+			#self.lines = self.ftp.nlst()
+			self.ftp.retrlines('LIST', self.lines.append) 
 			return self.lines
 		self._lock.release()
-	
-	def addToList(self, string):
-		self.lines.append(string)
 
 	def download(self, filename, outputFile):
 		"""Downloads file from server in binary mode"""
