@@ -4,6 +4,6 @@
 
 from CLI import BasicCLI
 
-u"""Very very simple testing for CLI stuff"""
+"""Very very simple testing for CLI stuff"""
 #TODO: Make real testing
-BasicCLI(u"serverlist.csv")
+BasicCLI("serverlist.csv")
